@@ -1,2 +1,2 @@
-# tabular-data-agumentation
+# tabular-data-augmentation
 Tabular Data Augmentation with LLM
