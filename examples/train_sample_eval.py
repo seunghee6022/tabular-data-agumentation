@@ -104,6 +104,15 @@ dataset_configs = {
     "intrusion": epochs,
 }
 
+dataset_configs = {
+    "california": epochs,
+    "insurance": epochs,
+    "adult": epochs,
+    "heloc": epochs,
+    "covtype": epochs,
+    "intrusion": epochs,
+}
+
 column_dict = {
     "iris": ["sepal length", "sepal width", "petal length", "petal width", "target"],
     "california": [],
@@ -176,7 +185,21 @@ for dataset_name, n_epochs in dataset_configs.items():
         batch_size=batch_size
     )
     start_time = time.time()
-    trainer = great.fit(train_data)
+
+    if dataset_name in ["california", "insurance"]:
+        early_stopping_metric = "mse" 
+        early_stopping_mode = "min"
+    else:
+        early_stopping_metric = "accuracy" 
+        early_stopping_mode = "max"
+
+    trainer = great.fit(
+        train_data=train_data,
+        eval_data=val_data,
+        early_stopping_patience=3,
+        early_stopping_metric=early_stopping_metric,
+        early_stopping_mode=early_stopping_mode,
+        )
     elapsed = time.time() - start_time
 
     # Save model
