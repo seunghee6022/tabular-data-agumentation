@@ -16,3 +16,7 @@ testing/
 be_great.egg-info/
 
 ../be_great.egg-info/
+
+dataset/
+outputs/
+venv/
